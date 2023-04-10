@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' blob: filesystem: cdnjs.cloudflare.com;">
+
+    <script src="build/pdf.js"></script>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+      }
+
+      h1 {
+        color: #333;
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      form {
+        width: 500px;
+        margin: 0 auto;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      input[type="file"] {
+        display: block;
+        margin-bottom: 20px;
+      }
+
+      button[type="submit"] {
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 18px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      #status {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      #reset {
+        display: block;
+        margin: 20px auto;
+        background-color: #fff;
+        color: #333;
+        border: 2px solid #333;
+        padding: 10px 20px;
+        font-size: 18px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      #viewer {
+        margin-top: 50px;
+        text-align: center;
+      }
+    </style>
+
+  </head>
+  <body>
+    <h1>Resume Uploader</h1>
+    <form id="resume-form">
+      <label for="resume">Upload your resume:</label>
+      <input type="file" id="resume" name="resume" accept=".pdf">
+      <button type="submit" >Upload</button>
+    </form>
+
+    <div id="status"></div>
+    <button id="reset">Reset</button>
+    <div id="viewer"></div>
+
+    <script src="popup.js"></script>
+    <script src="eventPage.js"></script>
+
+  </body>
+</html>
