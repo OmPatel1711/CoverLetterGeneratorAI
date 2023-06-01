@@ -1,26 +1,28 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Resume Uploader",
   "version": "1.0",
-  "browser_action": {
-    "default_popup": "popup.html",
+  "action": {
+     "default_popup": "popup.html",
     "default_title": "Resume Uploader"
   },
+ 
+  "offline_enabled": true,
+
+
+
   "background": {
-    "scripts": ["eventPage.js"],
-    "persistent": false
+    "service_worker": "eventPage.js"
   },
   "permissions": [
     "storage",
     "activeTab",
     "downloads",
-    "webRequestBlocking",
-    "http://*/*",
-    "https://*/*",
     "contextMenus",
-    "https://api.openai.com/"
+    "scripting"
   ],
-  "web_accessible_resources": [
-    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"
+  "host_permissions": [
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js",
+    "https://api.openai.com/"
   ]
 }

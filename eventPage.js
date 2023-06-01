@@ -1,7 +1,8 @@
-var contextMenuItem = {
-  "id": "JobDescription",
-  "title": "Make CoverLetter for this Job role",
-  "contexts": ["selection"]
+
+const contextMenuItem = {
+  id: "JobDescription",
+  title: "Make CoverLetter for this Job role",
+  contexts: ["selection"],
 };
 console.log("Context menu created");
 chrome.contextMenus.create(contextMenuItem);
@@ -15,8 +16,8 @@ chrome.storage.local.get(['resume'], function(result) {
   console.log(TextResume);
 });
 
-chrome.contextMenus.onClicked.addListener(function(clickedData) {
-  if (clickedData.menuItemId == "JobDescription" && clickedData.selectionText) {
+chrome.contextMenus.onClicked.addListener(function(clickedData, tab) {
+  if (clickedData.menuItemId === "JobDescription" && clickedData.selectionText) {
     console.log("Context menu started");
     selectedText = clickedData.selectionText;
     console.log("Selected text: " + selectedText);
@@ -43,7 +44,7 @@ chrome.contextMenus.onClicked.addListener(function(clickedData) {
         n: 1,
       };
 
-      const apiKey = "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"; // Replace with your actual API key
+      const apiKey = "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"; // Replace with your actual API key
 
       fetch("https://api.openai.com/v1/completions", {
         method: "POST",
@@ -60,12 +61,17 @@ chrome.contextMenus.onClicked.addListener(function(clickedData) {
           console.log(CoverLetter);
 
           // Replace the contents of the popup window with the actual cover letter
-          popup.document.open();
-          popup.document.write(
-            "<textarea id='CoverLetter' style='width: 100%; height: 300'></textarea>"
-          );
-          popup.document.getElementById("CoverLetter").value = CoverLetter;
-          popup.document.close();
+          chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            function: () => {
+              const textarea = document.createElement("textarea");
+              textarea.id = "CoverLetter";
+              textarea.style.width = "100%";
+              textarea.style.height = "300px";
+              textarea.value = CoverLetter;
+              document.body.appendChild(textarea);
+            },
+          });
         });
     } else {
       console.log("ERROR");

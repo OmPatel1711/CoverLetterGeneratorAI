@@ -1,4 +1,5 @@
-// Get the form, status, and reset elements
+
+
 var form = document.getElementById('resume-form');
 var status = document.getElementById('status');
 var resetBtn = document.getElementById('reset');
@@ -148,3 +149,4 @@ function formatText(text) {
 
   return text;
 }
+
